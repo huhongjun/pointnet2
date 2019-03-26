@@ -12,6 +12,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(BASE_DIR)
 sys.path.append(BASE_DIR) # model
 sys.path.append(ROOT_DIR) # provider
+
+print(BASE_DIR)
+
+sys.path.append(os.path.join(ROOT_DIR, 'models'))
 sys.path.append(os.path.join(ROOT_DIR, 'utils'))
 import provider
 import tf_util
@@ -46,7 +50,10 @@ DECAY_STEP = FLAGS.decay_step
 DECAY_RATE = FLAGS.decay_rate
 
 MODEL = importlib.import_module(FLAGS.model) # import network module
-MODEL_FILE = os.path.join(BASE_DIR, FLAGS.model+'.py')
+MODEL_FILE = os.path.join(ROOT_DIR, 'models', FLAGS.model+'.py')
+
+print(MODEL_FILE)
+
 LOG_DIR = FLAGS.log_dir
 if not os.path.exists(LOG_DIR): os.mkdir(LOG_DIR)
 os.system('cp %s %s' % (MODEL_FILE, LOG_DIR)) # bkp of model def
